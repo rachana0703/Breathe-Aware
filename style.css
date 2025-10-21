@@ -1,0 +1,135 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #e0e0e0;
+  text-align: center;
+}
+
+header {
+  background-color: #1f2833;
+  padding: 20px;
+  color: #66fcf1;
+}
+
+main {
+  padding: 40px 20px;
+}
+
+h1, h2 {
+  color: #45a29e;
+}
+
+#data-container {
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  min-height: 120px;
+  width: 90%;         /* almost full width */
+  max-width: 600px;   /* optional for large screens */
+}
+
+
+.aqi-box {
+  width: 100%;
+  padding: 20px;
+  border-radius: 10px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.aqi-good { background-color: #00e400; color: #000; }
+.aqi-fair { background-color: #ffff00; color: #000; }
+.aqi-moderate { background-color: #ff7e00; color: #000; }
+.aqi-unhealthy { background-color: #ff0000; color: #fff; }
+.aqi-very-unhealthy { background-color: #8f3f97; color: #fff; }
+.aqi-hazardous { background-color: #7e0023; color: #fff; }
+
+input, select, button {
+  padding: 6px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  border: none;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+button {
+  background-color: #45a29e;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #66fcf1;
+  color: #000;
+}
+
+.chart-advice-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+#ai-advice {
+  min-width: 260px;
+  background: #1e1e1e;
+  border: 1px solid #333;
+  border-radius: 10px;
+  padding: 24px 16px 16px 16px;
+  color: #e0e0e0;
+}
+
+#advice-output {
+  background: #262626;
+  color: #66fcf1;
+  border-radius: 6px;
+  border: 1px solid #45a29e;
+  font-weight: 500;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+#about-air-quality a {
+  color: #1f8efa;
+  text-decoration: none;
+}
+
+#about-air-quality a:hover {
+  text-decoration: underline;
+}
+
+#latlon-input input, #latlon-input button {
+  padding: 6px;
+  margin: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.charts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.chart-block {
+  flex: 1 1 300px;
+  max-width: 500px;
+  text-align: center;
+}
+
+.chart-block canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+
