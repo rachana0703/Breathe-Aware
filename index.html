@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BreathAware: Know Your Air</title>
+<link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header>
+  <h1>BreathAware: Know Your Air🌍</h1>
+  <p>Predicting Cleaner, Safer Skies</p>
+</header>
+
+<main>
+  <!-- Welcome Section -->
+  <section id="about">
+    <h2>Welcome</h2>
+    <p>We will use Earth observation data to visualize and predict air quality and weather safety.</p>
+  </section>
+
+  <!-- AQI Data Section -->
+  <section id="data">
+    <label for="city-select">Select a city:</label>
+    <select id="city-select">
+    
+  <optgroup label="Andhra Pradesh">
+    <option value="17.6868,83.2185">Visakhapatnam</option>
+    <option value="15.9129,79.73999">Tirupati</option>
+    <option value="16.5062,80.648">Vijayawada</option>
+    <option value="14.467,78.824">Anantapur</option>
+  </optgroup>
+  <optgroup label="Arunachal Pradesh">
+    <option value="27.0853,93.6053">Itanagar</option>
+    <option value="28.218,94.727">Tawang</option>
+  </optgroup>
+  <optgroup label="Assam">
+    <option value="26.1445,91.7362">Guwahati</option>
+    <option value="24.307,92.981">Dibrugarh</option>
+    <option value="26.493,94.551">Silchar</option>
+  </optgroup>
+  <optgroup label="Bihar">
+    <option value="25.5941,85.1376">Patna</option>
+    <option value="24.744,84.947">Gaya</option>
+    <option value="25.449,85.135">Bhagalpur</option>
+  </optgroup>
+  <optgroup label="Chhattisgarh">
+    <option value="21.2514,81.6296">Raipur</option>
+    <option value="22.3072,82.3304">Bilaspur</option>
+    <option value="21.4948,81.8723">Durg</option>
+  </optgroup>
+  <optgroup label="Goa">
+    <option value="15.2993,74.1240">Panaji</option>
+    <option value="15.4909,73.8278">Margao</option>
+  </optgroup>
+  <optgroup label="Gujarat">
+    <option value="23.0225,72.5714">Ahmedabad</option>
+    <option value="21.1702,72.8311">Surat</option>
+    <option value="22.3039,70.8022">Rajkot</option>
+    <option value="23.0535,72.6167">Vadodara</option>
+  </optgroup>
+  <optgroup label="Haryana">
+    <option value="28.4595,77.0266">Chandigarh</option>
+    <option value="28.7041,77.1025">Gurugram</option>
+    <option value="29.0588,76.0856">Hisar</option>
+  </optgroup>
+  <optgroup label="Himachal Pradesh">
+    <option value="31.1048,77.1734">Shimla</option>
+    <option value="32.1042,76.3163">Dharamshala</option>
+  </optgroup>
+  <optgroup label="Jharkhand">
+    <option value="23.3441,85.3096">Ranchi</option>
+    <option value="23.6495,86.148">Jamshedpur</option>
+  </optgroup>
+  <optgroup label="Karnataka">
+    <option value="12.9716,77.5946">Bangalore</option>
+    <option value="12.2958,76.6394">Mysuru</option>
+    <option value="13.0106,77.5522">Mangalore</option>
+    <option value="15.8507,74.4977">Belagavi</option>
+  </optgroup>
+  <optgroup label="Kerala">
+    <option value="8.5241,76.9366">Thiruvananthapuram</option>
+    <option value="10.8505,76.2711">Palakkad</option>
+    <option value="9.9312,76.2673">Kochi</option>
+    <option value="11.2588,75.7804">Calicut</option>
+  </optgroup>
+  <optgroup label="Madhya Pradesh">
+    <option value="23.2599,77.4126">Bhopal</option>
+    <option value="23.1815,79.9864">Jabalpur</option>
+    <option value="22.7196,75.8577">Indore</option>
+    <option value="26.4499,80.3319">Gwalior</option>
+  </optgroup>
+  <optgroup label="Maharashtra">
+    <option value="19.0760,72.8777">Mumbai</option>
+    <option value="18.5204,73.8567">Pune</option>
+    <option value="19.8762,75.3433">Aurangabad</option>
+    <option value="20.2961,85.8245">Nagpur</option>
+  </optgroup>
+  <optgroup label="Manipur">
+    <option value="24.8170,93.9368">Imphal</option>
+  </optgroup>
+  <optgroup label="Meghalaya">
+    <option value="25.5788,91.8933">Shillong</option>
+  </optgroup>
+  <optgroup label="Mizoram">
+    <option value="23.7104,92.7226">Aizawl</option>
+  </optgroup>
+  <optgroup label="Nagaland">
+    <option value="26.1584,94.5624">Kohima</option>
+  </optgroup>
+  <optgroup label="Odisha">
+    <option value="20.2961,85.8245">Bhubaneswar</option>
+    <option value="21.4735,81.9236">Rourkela</option>
+  </optgroup>
+  <optgroup label="Punjab">
+    <option value="30.7333,76.7794">Chandigarh</option>
+    <option value="31.1471,75.3412">Amritsar</option>
+    <option value="30.9010,75.8573">Ludhiana</option>
+  </optgroup>
+  <optgroup label="Rajasthan">
+    <option value="26.9124,75.7873">Jaipur</option>
+    <option value="24.5854,73.7125">Udaipur</option>
+    <option value="25.1374,75.8462">Kota</option>
+  </optgroup>
+  <optgroup label="Sikkim">
+    <option value="27.3350,88.6065">Gangtok</option>
+  </optgroup>
+  <optgroup label="Tamil Nadu">
+    <option value="13.0827,80.2707">Chennai</option>
+    <option value="11.0168,76.9558">Coimbatore</option>
+    <option value="10.7905,78.7047">Madurai</option>
+    <option value="12.2958,76.6394">Salem</option>
+  </optgroup>
+  <optgroup label="Telangana">
+    <option value="17.3850,78.4867">Hyderabad</option>
+    <option value="18.1124,79.0193">Warangal</option>
+  </optgroup>
+  <optgroup label="Tripura">
+    <option value="23.8315,91.2868">Agartala</option>
+  </optgroup>
+  <optgroup label="Uttar Pradesh">
+    <option value="26.8467,80.9462">Lucknow</option>
+    <option value="25.3176,82.9739">Varanasi</option>
+    <option value="27.1767,78.0081">Agra</option>
+    <option value="25.4358,81.8463">Prayagraj</option>
+    <option value="26.7606,83.3732">Gorakhpur</option>
+  </optgroup>
+  <optgroup label="Uttarakhand">
+    <option value="30.3165,78.0322">Dehradun</option>
+    <option value="29.9457,78.1642">Haridwar</option>
+  </optgroup>
+  <optgroup label="West Bengal">
+    <option value="22.5726,88.3639">Kolkata</option>
+    <option value="22.9868,87.8550">Kharagpur</option>
+    <option value="23.2599,88.6438">Durgapur</option>
+  </optgroup>
+  <optgroup label="Jammu & Kashmir">
+    <option value="34.0837,74.7973">Srinagar</option>
+    <option value="32.7266,74.8570">Jammu</option>
+  </optgroup>
+</select>
+
+
+    <!-- Latitude & Longitude Input -->
+    <section id="latlon-input" style="margin-top: 30px;">
+      <h2>Get AQI by Coordinates</h2>
+      <label for="lat">Latitude:</label>
+      <input type="number" id="lat" step="any" placeholder="e.g. 28.6139" />
+      <label for="lon">Longitude:</label>
+      <input type="number" id="lon" step="any" placeholder="e.g. 77.2090" />
+      <button id="get-aqi-btn">Get AQI</button>
+      <div id="latlon-result" style="margin-top: 15px;"></div>
+    </section>
+
+    <div id="spinner" style="display:none;"><p>Loading data...</p></div>
+    <div id="data-container"></div>
+  </section>
+
+  <!-- Charts & AI Advice -->
+  <div class="charts-wrapper" style="margin-top:30px; display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+    <!-- Current AQI Chart -->
+    <div class="chart-block">
+      <h3>Current AQI</h3>
+      <canvas id="aqiChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- Forecast AQI Chart -->
+    <div class="chart-block">
+      <h3>Forecast AQI</h3>
+      <canvas id="forecastChart" width="400" height="200"></canvas>
+    </div>
+
+    <!-- AI Health Advice -->
+    <aside id="ai-advice" style="flex:1 1 260px; background:#1e1e1e; border:1px solid #333; border-radius:10px; padding:24px 16px 16px 16px; color:#e0e0e0;">
+      <h2 style="margin-top:0;">Personalized AI Health Advice</h2>
+      <form id="health-form">
+        <label>Age:
+          <input type="number" id="user-age" min="1" max="130" required>
+        </label>
+        <label style="margin-left:20px;">
+          Respiratory Issues?
+          <select id="user-health">
+            <option value="no">No</option>
+            <option value="asthma">Asthma</option>
+            <option value="copd">COPD</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <button type="submit">Get Advice</button>
+      </form>
+      <div id="advice-output" style="margin-top: 15px;"></div>
+    </aside>
+  </div>
+
+  <!-- About Air Quality -->
+  <section id="about-air-quality" style="margin-top:40px;">
+    <h2>About Air Quality</h2>
+    <p>Air quality is an indicator of how clean or polluted the air we breathe is. It is important for our health and environment.</p>
+    <ul>
+      <li><a href="https://www.who.int/health-topics/air-pollution" target="_blank">WHO - Air Pollution</a></li>
+      <li><a href="https://aqicn.org/" target="_blank">Global Air Quality Insights - AQICN</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <p>&copy; 2025 BreathAware Team</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
