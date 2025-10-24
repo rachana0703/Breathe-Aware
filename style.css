@@ -1,67 +1,77 @@
+/* 🌤️ BreathAware - Fixed & Enhanced CSS */
+/* Full readability + proper AQI colors */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #121212;
-  color: #e0e0e0;
-  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  background: url('bluee-nature.jpg') no-repeat center bottom fixed;
+  background-size: cover;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
+/* ---------- HEADER ---------- */
 header {
-  background-color: #1f2833;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;
-  color: #66fcf1;
-}
-
-main {
-  padding: 40px 20px;
-}
-
-h1, h2 {
-  color: #45a29e;
-}
-
-#data-container {
-  margin: 20px auto;
-  padding: 20px;
-  border-radius: 10px;
-  min-height: 120px;
-  width: 90%;         /* almost full width */
-  max-width: 600px;   /* optional for large screens */
-}
-
-
-.aqi-box {
-  width: 100%;
-  padding: 20px;
-  border-radius: 10px;
-  font-weight: bold;
   text-align: center;
-  font-size: 1.2rem;
-  color: #000;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
-.aqi-good { background-color: #00e400; color: #000; }
-.aqi-fair { background-color: #ffff00; color: #000; }
-.aqi-moderate { background-color: #ff7e00; color: #000; }
-.aqi-unhealthy { background-color: #ff0000; color: #fff; }
-.aqi-very-unhealthy { background-color: #8f3f97; color: #fff; }
-.aqi-hazardous { background-color: #7e0023; color: #fff; }
+header h1 {
+  color: #66fcf1;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+}
 
+/* ---------- MAIN CONTAINER ---------- */
+main {
+  width: 90%;
+  max-width: 1100px;
+  margin: 30px auto;
+}
+
+/* Sections with light overlay for readability */
+section, #data-container, #ai-advice, .chart-block {
+  background-color: rgba(0, 0, 0, 0.45);
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- HEADINGS ---------- */
+h2, h3 {
+  color: #66fcf1;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+/* ---------- FORMS ---------- */
 input, select, button {
-  padding: 6px;
-  margin: 5px;
-  border-radius: 5px;
+  padding: 10px;
+  margin: 6px;
+  border-radius: 6px;
+  border: 1px solid #66fcf1;
+  background-color: rgba(0,0,0,0.5);
+  color: #fff;
   font-size: 16px;
-  border: none;
-  background-color: #1e1e1e;
-  color: #e0e0e0;
+  outline: none;
+}
+
+input::placeholder {
+  color: #ddd;
 }
 
 button {
   background-color: #45a29e;
-  color: #fff;
   cursor: pointer;
+  transition: 0.3s ease;
+  font-weight: bold;
 }
 
 button:hover {
@@ -69,67 +79,176 @@ button:hover {
   color: #000;
 }
 
-.chart-advice-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 30px;
-  margin-top: 30px;
+/* ---------- AQI DISPLAY ---------- */
+#aqi-value, #aqi-status {
+  font-weight: bold;
 }
 
-#ai-advice {
-  min-width: 260px;
-  background: #1e1e1e;
-  border: 1px solid #333;
+/* ----- AQI & Major Finding Colors ----- */
+.aqi-box, .major-finding {
+  display: inline-block;
+  padding: 20px;
+  margin: 15px auto;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  min-width: 180px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  box-shadow: 0 0 12px rgba(0,0,0,0.6);
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+/* ✅ Corrected AQI color mapping to match JS */
+.aqi-good {
+  background-color: #009966; /* Good */
+}
+
+.aqi-fair {
+  background-color: #ffde33; /* Fair */
+  color: #000;
+}
+
+.aqi-moderate {
+  background-color: #ff9933; /* Moderate */
+  color: #000;
+}
+
+.aqi-unhealthy {
+  background-color: #cc0033; /* Unhealthy */
+}
+
+.aqi-very-unhealthy {
+  background-color: #660099; /* Very Unhealthy */
+}
+
+.aqi-hazardous {
+  background-color: #7e0023; /* Hazardous */
+}
+
+/* Pollutant table readability */
+.pollutant-box td, .pollutant-box th {
+  color: #000;
+}
+
+/* ---------- CHARTS ---------- */
+.chart-block {
+  background-color: #23272c; /* solid dark grey */
+  color: #fff;               /* make text white */
+  padding: 20px;
   border-radius: 10px;
-  padding: 24px 16px 16px 16px;
-  color: #e0e0e0;
+  margin-top: 15px;
+}
+
+
+/* ---------- TABLES ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border: 1px solid #45a29e;
+}
+
+th {
+  background-color: rgba(102, 252, 241, 0.3);
+  color: #66fcf1;
+}
+
+td {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #000;
+}
+
+/* ---------- AI ADVICE SECTION ---------- */
+#ai-advice {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 1px solid #66fcf1;
+  padding: 20px;
+  border-radius: 15px;
 }
 
 #advice-output {
-  background: #262626;
-  color: #66fcf1;
-  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.6);
   border: 1px solid #45a29e;
-  font-weight: 500;
   padding: 15px;
-  margin-top: 10px;
+  border-radius: 10px;
+  color: #66fcf1;
+  text-shadow: none;
 }
 
-#about-air-quality a {
-  color: #1f8efa;
-  text-decoration: none;
-}
-
-#about-air-quality a:hover {
-  text-decoration: underline;
-}
-
-#latlon-input input, #latlon-input button {
-  padding: 6px;
-  margin: 5px;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.charts-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.chart-block {
-  flex: 1 1 300px;
-  max-width: 500px;
+/* ---------- FOOTER ---------- */
+footer {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: #66fcf1;
   text-align: center;
+  padding: 15px;
+  border-radius: 20px 20px 0 0;
+  font-size: 14px;
 }
 
-.chart-block canvas {
-  width: 100% !important;
-  height: auto !important;
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  input, select, button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  section {
+    width: 100%;
+    padding: 15px;
+  }
+}
+#detect-location-btn {
+  background: #ffbe76;
+  color: #191919;
+  font-weight: bold;
+  border: 2px solid #fdcb6e;
+  margin-bottom: 10px;
+  box-shadow: 1px 2px 11px #0000001a;
+  transition: background 0.2s;
+}
+#detect-location-btn:hover {
+  background: #fdcb6e;
 }
 
+#language-container {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  z-index: 20;
+  background: rgba(34,34,34,0.5);
+  border-radius: 8px;
+  padding: 8px 10px;
+  box-shadow: 0 2px 8px #0002;
+  display: flex;
+  align-items: center;
+}
+
+#language-container label {
+  color: #fff;
+  margin-right: 6px;
+  font-weight: 500;
+}
+
+#language-select {
+  background: #45a29e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left:2px;
+}
 
