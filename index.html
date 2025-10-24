@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +9,24 @@
 <link rel="stylesheet" href="style.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
 
 <header>
-  <h1>BreathAware: Know Your Air🌍</h1>
+  <div id="language-container">
+    <label for="language-select" style="font-size: 1rem;">🌐 Language:</label>
+    <select id="language-select">
+      <option value="en" selected>English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="kn">ಕನ್ನಡ</option>
+      <option value="ta">தமிழ்</option>
+    </select>
+  </div>
+  <h1>BreathAware: A Decision Assistive Platform To Know Your Air🌍</h1>
   <p>Predicting Cleaner, Safer Skies</p>
 </header>
+
+
 
 <main>
   <!-- Welcome Section -->
@@ -162,6 +176,21 @@
   </optgroup>
 </select>
 
+<button id="detect-location-btn" style="margin-bottom:12px;display:block;">
+  📍 Detect My Location & Show AQI
+</button>
+<section id="user-dashboard" style="margin:24px 0;">
+  <h2 style="color:#66fcf1;">My Dashboard</h2>
+  <div>
+    <button id="save-favorite-btn" style="background:#45a29e;color:#fff;">★ Save Current as Favorite</button>
+    <p><strong>Favorites:</strong> <span id="favorite-cities"></span></p>
+  </div>
+  <div>
+    <p><strong>Recent AQI Checks:</strong></p>
+    <ul id="recent-aqi-list"></ul>
+  </div>
+</section>
+
 
     <!-- Latitude & Longitude Input -->
     <section id="latlon-input" style="margin-top: 30px;">
@@ -230,6 +259,7 @@
 </footer>
 
 <script src="script.js"></script>
+  <script src="script.js"></script>
   <script src="//code.tidio.co/bih9yxbu2y1107e4kyhg3alk8u6sqico.js" async></script>
 </body>
 </html>
