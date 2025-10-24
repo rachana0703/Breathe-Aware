@@ -10,19 +10,93 @@ const getAqiBtn = document.getElementById('get-aqi-btn');
 // Chart contexts
 const ctxCurrent = document.getElementById('aqiChart').getContext('2d');
 const ctxForecast = document.getElementById('forecastChart').getContext('2d');
-
-// Current AQI chart
 const currentChart = new Chart(ctxCurrent, {
     type: 'line',
-    data: { labels: [], datasets: [{ label: 'Current AQI', data: [], borderColor: 'rgba(69, 162, 158, 1)', backgroundColor: 'rgba(69, 162, 158, 0.2)', fill: true, tension: 0.3 }] },
-    options: { scales: { y: { beginAtZero: true, max: 5 } } }
+    data: { 
+        labels: [], 
+        datasets: [{
+            label: 'Current AQI', 
+            data: [], 
+            borderColor: 'rgba(69, 162, 158, 1)', 
+            backgroundColor: 'rgba(69, 162, 158, 0.2)', 
+            fill: true, 
+            tension: 0.3 
+        }] 
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 5,
+                ticks: {
+                    color: '#fff'           // Y axis numbers white
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.1)' // gridlines subtle white
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#fff'           // X axis labels white
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.1)'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#fff'           // Legend text white
+                }
+            }
+        }
+    }
 });
 
-// Forecast AQI chart
+// Repeat same for forecastChart:
 const forecastChart = new Chart(ctxForecast, {
     type: 'line',
-    data: { labels: [], datasets: [{ label: 'Forecast AQI', data: [], borderColor: 'rgba(255, 99, 132, 1)', backgroundColor: 'rgba(255, 99, 132, 0.2)', fill: true, tension: 0.3 }] },
-    options: { scales: { y: { beginAtZero: true, max: 5 } } }
+    data: { 
+        labels: [], 
+        datasets: [{
+            label: 'Forecast AQI', 
+            data: [], 
+            borderColor: 'rgba(255, 99, 132, 1)', 
+            backgroundColor: 'rgba(255, 99, 132, 0.2)', 
+            fill: true, 
+            tension: 0.3 
+        }] 
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                max: 5,
+                ticks: {
+                    color: '#fff'
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.1)'
+                }
+            },
+            x: {
+                ticks: {
+                    color: '#fff'
+                },
+                grid: {
+                    color: 'rgba(255,255,255,0.1)'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                labels: {
+                    color: '#fff'
+                }
+            }
+        }
+    }
 });
 
 // AQI color classes
@@ -59,21 +133,31 @@ const pollutantInfo = {
 
 // Display AQI and pollutants (normal font)
 function displayAQIData(aqi, components) {
-    const colorClass = getAQIColorClass(aqi);
-    let html = `<div class="aqi-box ${colorClass}" style="font-weight: normal; font-size: 1rem;">
-        <p>AQI: ${aqi} — ${getAQICategory(aqi)}</p>`;
+  const colorClass = getAQIColorClass(aqi);
+  let html = `
+    <div class="aqi-box ${colorClass}">
+      <h3>Major Finding</h3>
+      <p><strong>AQI:</strong> ${aqi} — ${getAQICategory(aqi)}</p>
+    </div>
 
-    for (let key in components) {
-        if (pollutantInfo[key] !== undefined) {
-            const name = key.toUpperCase().replace('_', '.'); // PM2_5 → PM2.5
-            html += `<p>${name}: ${components[key].toFixed(1)} μg/m³ — ${pollutantInfo[key]}</p>`;
-        }
+    <div class="pollutant-box">
+      <table>
+        <tr><th>Pollutant</th><th>Concentration (μg/m³)</th><th>Health Impact</th></tr>`;
+
+  for (let key in components) {
+    if (pollutantInfo[key]) {
+      html += `
+        <tr>
+          <td>${key.toUpperCase()}</td>
+          <td>${components[key].toFixed(1)}</td>
+          <td>${pollutantInfo[key]}</td>
+        </tr>`;
     }
+  }
 
-    html += `</div>`;
-    container.innerHTML = html;
+  html += `</table></div>`;
+  container.innerHTML = html;
 }
-
 
 // Update current chart
 function updateCurrentChart(aqi, timeLabel) {
@@ -168,3 +252,99 @@ getAqiBtn.addEventListener('click', () => {
     if(!isNaN(lat) && !isNaN(lon)) fetchAQIData(lat, lon);
     else alert("Please enter valid latitude and longitude!");
 });
+const detectBtn = document.getElementById('detect-location-btn');
+const latlonResult = document.getElementById('latlon-result');
+
+// On button click, get location and fetch AQI
+detectBtn.addEventListener('click', function() {
+  latlonResult.innerHTML = "Getting your location...";
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      const lat = position.coords.latitude.toFixed(5);
+      const lon = position.coords.longitude.toFixed(5);
+      latInput.value = lat;
+      lonInput.value = lon;
+      latlonResult.innerHTML = "Loading AQI for your current location...";
+      fetchAQIData(lat, lon);
+    }, function(error) {
+      latlonResult.innerHTML = "Could not get your location. Please allow location access and try again.";
+    });
+  } else {
+    latlonResult.innerHTML = "Geolocation is not supported by this browser.";
+  }
+});
+const translations = {
+  en: {
+    welcome: "Welcome",
+    getAQI: "Get AQI",
+    selectCity: "Select a city:",
+    adviceTitle: "Personalized AI Health Advice",
+    // Add other texts as needed
+  },
+  hi: {
+    welcome: "स्वागत है",
+    getAQI: "एयर क्वालिटी सूचकांक प्राप्त करें",
+    selectCity: "शहर चुनें:",
+    adviceTitle: "व्यक्तिगत एआई स्वास्थ्य सलाह"
+  },
+  kn: {
+    welcome: "ಸ್ವಾಗತ",
+    getAQI: "AQI ಪಡೆಯಿರಿ",
+    selectCity: "ನಗರವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+    adviceTitle: "ವ್ಯಕ್ತಿಗತ AI ಆರೋಗ್ಯ ಸಲಹೆ"
+  },
+  ta: {
+    welcome: "வரவேற்ப்",
+    getAQI: "AQI பெறவும்",
+    selectCity: "நகரத்தை தேர்ந்தெடுக்கவும்:",
+    adviceTitle: "தனிப்பயன் ஏ.ஐ. ஆரோக்கிய அறிவுரை"
+  }
+};
+
+function updateLanguage(lang) {
+  document.querySelector('h2').textContent = translations[lang].welcome;
+  document.getElementById('get-aqi-btn').textContent = translations[lang].getAQI;
+  document.querySelector('label[for="city-select"]').textContent = translations[lang].selectCity;
+  document.querySelector('#ai-advice h2').textContent = translations[lang].adviceTitle;
+  // Add more selectors as needed for other labels
+}
+
+document.getElementById('language-select').addEventListener('change', function(e) {
+  updateLanguage(e.target.value);
+});
+
+// Set default on load
+updateLanguage('en');
+// --- Dashboard Logic (Favorites & Recent Checks) ---
+
+function getFavorites() {
+  return JSON.parse(localStorage.getItem('favoriteCities')) || [];
+}
+function setFavorites(favs) {
+  localStorage.setItem('favoriteCities', JSON.stringify(favs));
+}
+
+function addRecentCheck(city, aqi) {
+  let recents = JSON.parse(localStorage.getItem('recentAQI')) || [];
+  recents.unshift({ city, aqi, time: new Date().toLocaleString() });
+  recents = recents.slice(0, 4); // Keep last 4
+  localStorage.setItem('recentAQI', JSON.stringify(recents));
+}
+
+function updateFavoritesUI() {
+  const favs = getFavorites();
+  document.getElementById('favorite-cities').textContent =
+    favs.length ? favs.join(', ') : 'None yet';
+}
+function updateRecentAQIUI() {
+  const recents = JSON.parse(localStorage.getItem('recentAQI')) || [];
+  const ul = document.getElementById('recent-aqi-list');
+  ul.innerHTML = '';
+  recents.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = `${item.city} (AQI: ${item.aqi}) at ${item.time}`;
+    ul.appendChild(li);
+  });
+}
+
+
